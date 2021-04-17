@@ -293,6 +293,3 @@ def merge_pdfs(year):
 
 #create_payslip()
 #merge_pdfs()
-
-if __name__ == "__main__":
-    app.run()

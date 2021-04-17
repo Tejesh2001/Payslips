@@ -1,1 +1,0 @@
-web: gunicorn payslipsv1:app
