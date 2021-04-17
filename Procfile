@@ -1,1 +1,1 @@
-web: gunicorn payslipsv1.wsgi --log-file -
+web: gunicorn app:app
