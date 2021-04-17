@@ -33,7 +33,7 @@ import requests
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/payslipsv1')
 def index():
   return render_template("index.html")
 
