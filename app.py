@@ -108,7 +108,7 @@ def create_payslip():
             else:
                 vals.append("N/A")
         pdf = SimpleDocTemplate(
-                    str(vals[1])+str(vals[0])  + '.pdf' ,
+                    str(vals[1])+ ' ' + str(vals[0])  + '.pdf' ,
                     pagesize= A4,
                     )
 
@@ -235,7 +235,7 @@ def create_payslip():
             
             # Open our PDF file with the PdfFileReader
             name = str(vals[1])+ ' ' + str(vals[0])  + '.pdf'
-            filename = PdfFileReader(str(vals[1])+ ' ' + str(vals[0])  + '.pdf')
+            filename = PdfFileReader(name)
             out.appendPagesFromReader(filename)
             
             if password == "":
