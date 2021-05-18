@@ -295,4 +295,4 @@ def merge_pdfs(year):
 #merge_pdfs()
 
 if __name__ == "__main__":
-    app.run()
+    app.run(threaded=True, port = int(os.environ.get('PORT', 5000)))
