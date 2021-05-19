@@ -251,6 +251,7 @@ def create_payslip():
             with open(name, "wb") as f:
                 # Write our encrypted PDF to this file
                 out.write(f)
+            return send_file(name)
 
             zipObj.write(name)
 
