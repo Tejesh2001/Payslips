@@ -45,7 +45,7 @@ def create_payslip():
 
     #this was changed
     #convert the font so it is compatible
-    #pdfmetrics.registerFont(TTFont('Courier','Arial.ttf'))
+    pdfmetrics.registerFont(TTFont('Arial','arial.ttf'))
 
 
     r = request.files['excel']
@@ -115,7 +115,6 @@ def create_payslip():
                     str(vals[1])+ ' ' + str(vals[0])  + '.pdf' ,
                     pagesize= A4,
                     )
-        pdf.setFont('Courier')
 
         if str(vals[2]) != 'x' and str(vals[2]) != 'N/A' and type(vals[0]) == str :
             data = []
