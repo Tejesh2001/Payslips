@@ -42,8 +42,12 @@ def index():
 def create_payslip():
 
     zipObj = ZipFile('sample.zip', 'w')
+
+    #this was changed
     #convert the font so it is compatible
-    pdfmetrics.registerFont(TTFont('Arial','Arial.ttf'))
+    pdfmetrics.registerFont(TTFont('Arial','arial.ttf'))
+
+
     r = request.files['excel']
 
     #import the sheet from the excel file
@@ -293,3 +297,6 @@ def merge_pdfs(year):
 
 #create_payslip()
 #merge_pdfs()
+
+if __name__ == "__main__":
+    app.run(threaded=True, port = int(os.environ.get('PORT', 5000)))

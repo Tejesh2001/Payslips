@@ -256,7 +256,7 @@ def create_payslip():
 
             year = vals[0]
 
-          
+            print(name)
     if (year != "N/A"):
         merge_pdfs(year)
             #Saving the pdf file
@@ -277,7 +277,7 @@ def merge_pdfs(year):
         
     # Parent Directory path 
         
-    DEST_DIR = 'C:\\Users\\tejes\Desktop\conacent\payslips\payslipsFolder ' + year 
+    DEST_DIR = year 
     # Path 
     p = os.path.join(files_dir, DEST_DIR)
     if path.exists(p):
