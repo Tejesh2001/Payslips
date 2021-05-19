@@ -42,8 +42,12 @@ def index():
 def create_payslip():
 
     zipObj = ZipFile('sample.zip', 'w')
+
+    #this was changed
     #convert the font so it is compatible
-    pdfmetrics.registerFont(TTFont('Arial','Arial.ttf'))
+    #pdfmetrics.registerFont(TTFont('Courier','Arial.ttf'))
+
+
     r = request.files['excel']
 
     #import the sheet from the excel file
@@ -111,6 +115,7 @@ def create_payslip():
                     str(vals[1])+ ' ' + str(vals[0])  + '.pdf' ,
                     pagesize= A4,
                     )
+        pdf.setFont('Courier')
 
         if str(vals[2]) != 'x' and str(vals[2]) != 'N/A' and type(vals[0]) == str :
             data = []
