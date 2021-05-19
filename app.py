@@ -256,7 +256,7 @@ def create_payslip():
 
             year = vals[0]
 
-            print(name)
+          
     if (year != "N/A"):
         merge_pdfs(year)
             #Saving the pdf file
@@ -277,12 +277,12 @@ def merge_pdfs(year):
         
     # Parent Directory path 
         
-    DEST_DIR = files_dir + ' ' + year
+    DEST_DIR = 'C:\\Users\\tejes\Desktop\conacent\payslips\payslipsFolder ' + year 
     # Path 
     p = os.path.normpath(DEST_DIR)
     if path.exists(p):
         shutil.rmtree(p, ignore_errors = False) 
-    os.mkdir(p)
+    os.mkdir(p) 
 
 
     pdf_files = [f for f in os.listdir(files_dir) if f.endswith('.pdf')] #Get all files in the directory that end with '.pdf'
