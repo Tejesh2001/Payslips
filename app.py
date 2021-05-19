@@ -251,15 +251,21 @@ def create_payslip():
             with open(name, "wb") as f:
                 # Write our encrypted PDF to this file
                 out.write(f)
-            return send_file(name)
+            #return send_file(name)
 
             zipObj.write(name)
+            
+            import os 
+            if os.path.exists(name):
+                os.remove(name)
+            else:
+                print("The file does not exist")
 
             year = vals[0]
 
           
-    if (year != "N/A"):
-        merge_pdfs(year)
+    # if (year != "N/A"):
+    #     merge_pdfs(year)
             #Saving the pdf file
     zipObj.close()
     return send_file('sample.zip')
