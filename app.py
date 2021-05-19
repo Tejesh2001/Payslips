@@ -277,12 +277,12 @@ def merge_pdfs(year):
         
     # Parent Directory path 
         
-    DEST_DIR = year 
+    DEST_DIR = files_dir + ' ' + year
     # Path 
-    p = os.path.join(files_dir, DEST_DIR)
+    p = os.path.normpath(DEST_DIR)
     if path.exists(p):
         shutil.rmtree(p, ignore_errors = False) 
-    os.mkdir(p) 
+    os.mkdir(p)
 
 
     pdf_files = [f for f in os.listdir(files_dir) if f.endswith('.pdf')] #Get all files in the directory that end with '.pdf'
