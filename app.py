@@ -2,6 +2,10 @@
 import openpyxl
 import shutil
 
+from sendEmail import sendEmail
+
+
+
 #libraries to create the pdf file and add text to it
 from reportlab.pdfgen import canvas
 
@@ -111,8 +115,9 @@ def create_payslip():
                 vals.append(inp)
             else:
                 vals.append("N/A")
+        name =  str(vals[1])+ ' ' + str(vals[0])  + ' ' + str(vals[3]) +  '.pdf' 
         pdf = SimpleDocTemplate(
-                    str(vals[1])+ ' ' + str(vals[0])  + '.pdf' ,
+                    name,
                     pagesize= A4,
                     )
 
@@ -238,7 +243,6 @@ def create_payslip():
 
             
             # Open our PDF file with the PdfFileReader
-            name = str(vals[1])+ ' ' + str(vals[0])  + '.pdf'
             filename = PdfFileReader(name)
             out.appendPagesFromReader(filename)
             
@@ -253,10 +257,13 @@ def create_payslip():
                 out.write(f)
             #return send_file(name)
 
-            zipObj.write(name)
+            #zipObj.write(name)
+
+
             
             import os 
             if os.path.exists(name):
+                sendEmail(name)
                 os.remove(name)
             else:
                 print("The file does not exist")
@@ -268,7 +275,8 @@ def create_payslip():
     #     merge_pdfs(year)
             #Saving the pdf file
     zipObj.close()
-    return send_file('sample.zip')
+    return "Salary slips have been sent", 200
+    # return send_file('sample.zip')
         
 def merge_pdfs(year):
 
