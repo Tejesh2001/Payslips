@@ -58,7 +58,7 @@ from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
 
-def sendEmail(name):
+def sendEmail(name, email):
     body = '''Hello,
     This is the body of the email
     sicerely yours
@@ -72,13 +72,13 @@ def sendEmail(name):
     # copy the password generated here
     password = 'conacentcf90'
     # put the email of the receiver here
-    receiver = 'hr@conacent.com'
+    receiver = email
 
     #Setup the MIME
     message = MIMEMultipart()
     message['From'] = sender
     message['To'] = receiver
-    message["Bcc"] = receiver
+    message["Bcc"] = sender
     message['Subject'] = 'This email has an attacment, a pdf file'
 
     message.attach(MIMEText(body, 'plain'))

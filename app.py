@@ -75,30 +75,31 @@ def create_payslip():
     logo.VALIGN = "TOP"
     col_names = []
     for name in sheet[2]:
-        if name.value is not None:
+        if name.value and name.value != "email":
             col_names.append(name.value)
+        
 
     super_columns = []
     for super_column in sheet[1]:
         super_columns.append(super_column.value)
 
-
-
-
-
-
     year = ""
 
     styles = getSampleStyleSheet()
-    for i in range (4, 187):
+    i = 3
+    emails = []
+    while (i):
         vals = []
         password = ""
+        if sheet.cell(row = i, column = 1).value is None:
+            break
         for j in range(1,sheet.max_column+1):
+           
             if sheet.cell(row = i, column = j).value is not None:
                 inp = str(sheet.cell(row = i, column = j).value)
+        
                 if "00:00:00" in inp:
-                    # print(inp)
-                    
+
                     inp = inp.replace("00:00:00","")
 
                     y = inp[:inp.find("-")]
@@ -106,29 +107,30 @@ def create_payslip():
                     month = inp[inp.find("-") + 1: inp.rfind("-")]
                     date = inp[inp.rfind("-") + 1: ]
                     inp = date + "/" + month + "/" + y
-                    inp = inp.replace(" ","")                    
-                
+                    inp = inp.replace(" ","")                  
                 if ("#" in inp):
                     print("this date of joining is weird")
-
-               
-                vals.append(inp)
+                if "@" in inp:
+                    emails.append(inp)
+                else :
+                    vals.append(inp)
             else:
                 vals.append("N/A")
         name =  str(vals[1])+ ' ' + str(vals[0])  + ' ' + str(vals[3]) +  '.pdf' 
+        email = emails[i - 3]
+        print(email + " this is email")
         pdf = SimpleDocTemplate(
                     name,
                     pagesize= A4,
                     )
 
-        if str(vals[2]) != 'x' and str(vals[2]) != 'N/A' and type(vals[0]) == str :
+        if str(vals[2]) != 'x' and str(vals[2]) != 'N/A' and type(vals[0]) == str:
             data = []
             elements = [logo]
             for j in range(len(vals)):
                 if super_columns[j] is None:
                     if str(vals[j]) == 'N/A':
                         continue
-
                     data.append([col_names[j], str(vals[j])])
                 elif super_columns[j] == "LEAVE STATEMENT":
                     table = Table(data, rowHeights = len(data) * [13], colWidths=inch*3)
@@ -260,15 +262,15 @@ def create_payslip():
             #zipObj.write(name)
 
 
-            
-            import os 
-            if os.path.exists(name):
-                sendEmail(name)
-                os.remove(name)
-            else:
-                print("The file does not exist")
-
+            i += 1
             year = vals[0]
+            if (year != "N/A"):
+                import os 
+                if os.path.exists(name):
+                    sendEmail(name, email)
+                    os.remove(name)
+                else:
+                    print("The file does not exist")
 
           
     # if (year != "N/A"):
@@ -314,4 +316,4 @@ def merge_pdfs(year):
 #merge_pdfs()
 
 if __name__ == "__main__":
-    app.run(threaded=True, port = int(os.environ.get('PORT', 5000)))
+    app.run(debug = True, threaded=True, port = int(os.environ.get('PORT', 5000)))
