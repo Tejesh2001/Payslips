@@ -60,8 +60,8 @@ from email import encoders
 
 def sendEmail(name, email, month, personName):
     body = f''' Dear  {personName}, 
-            Please find attached the salary slip for the month of {month}.
-            HR'''
+                Please find attached the salary slip for the month of {month}.
+                HR'''
     # put your email here
     sender = 'hr@conacent.com'
     # get the password in the gmail (manage your google account, click on the avatar on the right)

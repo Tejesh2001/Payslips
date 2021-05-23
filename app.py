@@ -45,7 +45,6 @@ def index():
 
 def create_payslip():
 
-    zipObj = ZipFile('sample.zip', 'w')
 
     #this was changed
     #convert the font so it is compatible
@@ -228,7 +227,7 @@ def create_payslip():
             table.setStyle(style)
             elements.append(Spacer(1,10))
             elements.append(table)
-            elements.append(Spacer(1,120))
+            elements.append(Spacer(1,100))
             style_new = getSampleStyleSheet()
             yourStyle = ParagraphStyle('yourtitle',
                            fontName="Helvetica",
@@ -275,8 +274,7 @@ def create_payslip():
           
     # if (year != "N/A"):
     #     merge_pdfs(year)
-            #Saving the pdf file
-    zipObj.close()
+            #Saving the pdf file\
     return "Salary slips have been sent", 200
     # return send_file('sample.zip')
         
