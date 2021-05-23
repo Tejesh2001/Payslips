@@ -100,14 +100,14 @@ def create_payslip():
         
                 if "00:00:00" in inp:
 
-                    inp = inp.replace("00:00:00","")
-
+                    inp = inp.replace("00:00:00","")    
+                      
                     y = inp[:inp.find("-")]
                     # inp = inp[::-1]
                     month = inp[inp.find("-") + 1: inp.rfind("-")]
                     date = inp[inp.rfind("-") + 1: ]
                     inp = date + "/" + month + "/" + y
-                    inp = inp.replace(" ","")                  
+                    inp = inp.replace(" ","")             
                 if ("#" in inp):
                     print("this date of joining is weird")
                 if "@" in inp:
