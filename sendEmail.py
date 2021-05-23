@@ -58,12 +58,10 @@ from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
 
-def sendEmail(name, email):
-    body = '''Hello,
-    This is the body of the email
-    sicerely yours
-    G.G.
-    '''
+def sendEmail(name, email, month, personName):
+    body = f''' Dear  {personName}, 
+            Please find attached the salary slip for the month of {month}.
+            HR'''
     # put your email here
     sender = 'hr@conacent.com'
     # get the password in the gmail (manage your google account, click on the avatar on the right)
@@ -79,7 +77,7 @@ def sendEmail(name, email):
     message['From'] = sender
     message['To'] = receiver
     message["Bcc"] = sender
-    message['Subject'] = 'This email has an attacment, a pdf file'
+    message['Subject'] = f'Salary slip for the month of {month}'
 
     message.attach(MIMEText(body, 'plain'))
 

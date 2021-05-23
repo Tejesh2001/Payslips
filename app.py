@@ -116,7 +116,7 @@ def create_payslip():
                     vals.append(inp)
             else:
                 vals.append("N/A")
-        name =  str(vals[1])+ ' ' + str(vals[0])  + ' ' + str(vals[3]) +  '.pdf' 
+        name =  str(vals[1])+ ' ' + str(vals[0])  + '.pdf' 
         email = emails[i - 3]
         print(email + " this is email")
         pdf = SimpleDocTemplate(
@@ -267,7 +267,7 @@ def create_payslip():
             if (year != "N/A"):
                 import os 
                 if os.path.exists(name):
-                    sendEmail(name, email)
+                    sendEmail(name, email, month=str(vals[0]), personName= str (vals[1]))
                     os.remove(name)
                 else:
                     print("The file does not exist")
