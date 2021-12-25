@@ -74,7 +74,7 @@ def create_payslip():
     logo.VALIGN = "TOP"
     col_names = []
     for name in sheet[2]:
-        if name.value and name.value != "email":
+        if name.value is not None and name.value != "email":
             col_names.append(name.value)
         
 
@@ -95,6 +95,9 @@ def create_payslip():
         for j in range(1,sheet.max_column+1):
            
             if sheet.cell(row = i, column = j).value is not None:
+
+                
+
                 inp = str(sheet.cell(row = i, column = j).value)
         
                 if "00:00:00" in inp:
