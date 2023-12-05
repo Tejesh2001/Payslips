@@ -60,7 +60,8 @@ from email import encoders
 
 def sendEmail(name, email, month, personName):
     body = f''' Dear  {personName}, 
-                Please find attached the salary slip for the month of {month}.
+                Please find attached the  {month}. 
+                Please use your PAN number as the password for opening the pdf document.
                 HR'''
     # put your email here
     sender = 'hr@conacent.com'
@@ -68,7 +69,7 @@ def sendEmail(name, email, month, personName):
     # then go to security (right) and app password (center)
     # insert the password and then choose mail and this computer and then generate
     # copy the password generated here
-    password = 'conacentcf90'
+    password = 'ConacentCf90!@'
     # put the email of the receiver here
     receiver = email
 
@@ -77,7 +78,7 @@ def sendEmail(name, email, month, personName):
     message['From'] = sender
     message['To'] = receiver
     message["Bcc"] = sender
-    message['Subject'] = f'Salary slip for the month of {month}'
+    message['Subject'] = f' {month}'
 
     message.attach(MIMEText(body, 'plain'))
 
@@ -99,7 +100,6 @@ def sendEmail(name, email, month, personName):
 
     #use gmail with port
     session = smtplib.SMTP('mail.conacent.com', 587)
-
     #enable security
     session.starttls()
 
@@ -109,3 +109,4 @@ def sendEmail(name, email, month, personName):
     text = message.as_string()
     session.sendmail(sender, receiver, text)
     session.quit()
+    

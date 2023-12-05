@@ -120,7 +120,6 @@ def create_payslip():
                 vals.append("N/A")
         name =  str(vals[1])+ ' ' + str(vals[0])  + '.pdf' 
         email = emails[i - 3]
-        print(email + " this is email")
         pdf = SimpleDocTemplate(
                     name,
                     pagesize= A4,
@@ -168,7 +167,7 @@ def create_payslip():
 
                         #First part
                        
-                        data[0] = [Paragraph("<b> SALARY FOR" + " " + data[0][0].upper() +  "</b>")]
+                        data[0] = [Paragraph("<b> INCREMENT W.E.F." + " " + data[0][0].upper() +  "</b>")]
                         table = Table(data)
                         style = TableStyle([
                         ('BACKGROUND', (0,0), (3,0), colors.white),
@@ -238,8 +237,8 @@ def create_payslip():
                            parent=style_new['Heading2'],
                            alignment=1,
                            spaceAfter=2)
-            elements.append(Paragraph(("<i>Signature not required for this payslip </i>"), yourStyle))
-            elements.append(Paragraph("<i> Registered Office:  P-94/95, Bangur Avenue, BL-C, Kolkata - 700055 </i>",  yourStyle))
+            elements.append(Paragraph(("<i> CTC includes Company contributions to PF and ESI (if applicable) and Gratuity_  Please note that salary details and increment are strictly confidential  and not to be discussed with anyone </i>"), yourStyle))
+            elements.append(Paragraph("<i> CTC includes Company contributions to PF and ESI (if applicable) and Gratuity_  Please note that salary details and increment are strictly confidential  and not to be discussed with anyone </i>",  yourStyle))
             pdf.build(elements)
 
             # create a PdfFileWriter object
@@ -271,6 +270,8 @@ def create_payslip():
                 if os.path.exists(name):
                     sendEmail(name, email, month=str(vals[0]), personName= str (vals[1]))
                     os.remove(name)
+
+
                 else:
                     print("The file does not exist")
 
@@ -281,37 +282,37 @@ def create_payslip():
     return "Salary slips have been sent", 200
     # return send_file('sample.zip')
         
-def merge_pdfs(year):
+# def merge_pdfs(year):
 
-    files_dir = 'C:\\Users\\tejes\Desktop\conacent\payslips' 
-    SOURCE_DIR = 'C:\\Users\\tejes\Desktop\conacent\payslips' 
-
-
+#     files_dir = 'C:\\Users\\tejes\Desktop\conacent\payslips' 
+#     SOURCE_DIR = 'C:\\Users\\tejes\Desktop\conacent\payslips' 
 
 
-    import os 
-    from os import path
-    # Directory 
+
+
+#     import os 
+#     from os import path
+#     # Directory 
         
-    # Parent Directory path 
+#     # Parent Directory path 
         
-    DEST_DIR = 'C:\\Users\\tejes\Desktop\conacent\payslips\payslipsFolder ' + year 
-    # Path 
-    p = os.path.normpath(DEST_DIR)
-    if path.exists(p):
-        shutil.rmtree(p, ignore_errors = False) 
-    os.mkdir(p) 
+#     DEST_DIR = 'C:\\Users\\tejes\Desktop\conacent\payslips\payslipsFolder ' + year 
+#     # Path 
+#     p = os.path.normpath(DEST_DIR)
+#     if path.exists(p):
+#         shutil.rmtree(p, ignore_errors = False) 
+#     os.mkdir(p) 
 
 
-    pdf_files = [f for f in os.listdir(files_dir) if f.endswith('.pdf')] #Get all files in the directory that end with '.pdf'
-    merger = PdfFileMerger() #Create an empty file
-    for fname in pdf_files:
+#     pdf_files = [f for f in os.listdir(files_dir) if f.endswith('.pdf')] #Get all files in the directory that end with '.pdf'
+#     merger = PdfFileMerger() #Create an empty file
+#     for fname in pdf_files:
 
-        #merger.append(PdfFileReader(os.path.join(files_dir,filename),'rb')) #Add every pdf to the empty file
-        #erger.write(PdfFileReader(os.path.join('C:\\Users\\tejes\Desktop\conacent\payslipsFolder',filename))) #Save the file
-        shutil.move(os.path.join(SOURCE_DIR, fname), DEST_DIR)
+#         #merger.append(PdfFileReader(os.path.join(files_dir,filename),'rb')) #Add every pdf to the empty file
+#         #erger.write(PdfFileReader(os.path.join('C:\\Users\\tejes\Desktop\conacent\payslipsFolder',filename))) #Save the file
+#         shutil.move(os.path.join(SOURCE_DIR, fname), DEST_DIR)
     
-    shutil.rmtree(p, ignore_errors = False) 
+#     shutil.rmtree(p, ignore_errors = False) 
 
 #create_payslip()
 #merge_pdfs()

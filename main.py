@@ -159,7 +159,7 @@ def create_payslip():
 
                         #First part
                        
-                        data[0] = [Paragraph("<b> SALARY FOR" + " " + data[0][0].upper() +  "</b>")]
+                        data[0] = [Paragraph("<b> INCREMENT W.E.F" + " " + data[0][0].upper() +  "</b>")]
                         table = Table(data)
                         style = TableStyle([
                         ('BACKGROUND', (0,0), (3,0), colors.white),
@@ -229,8 +229,8 @@ def create_payslip():
                            parent=style_new['Heading2'],
                            alignment=1,
                            spaceAfter=2)
-            elements.append(Paragraph(("<i>Signature not required for this payslip </i>"), yourStyle))
-            elements.append(Paragraph("<i> Registered Office:  P-94/95, Bangur Avenue, BL-C, Kolkata - 700055 </i>",  yourStyle))
+            elements.append(Paragraph(("<i> CTC includes Company contributions to PF and ESI (if applicable) and Gratuity_  Please note that salary details and increment are strictly confidential  and not to be discussed with anyone </i>"), yourStyle))
+            elements.append(Paragraph("<i> CTC includes Company contributions to PF and ESI (if applicable) and Gratuity_  Please note that salary details and increment are strictly confidential  and not to be discussed with anyone </i>",  yourStyle))
             pdf.build(elements)
 
             # create a PdfFileWriter object
