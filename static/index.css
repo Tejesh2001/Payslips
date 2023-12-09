@@ -1,0 +1,33 @@
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: beige;
+}
+
+.container {
+    width: 80%;
+    padding: 20px;
+    background-color:whitesmoke; /* Set the background color to pink */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.container h2 {
+    margin-bottom: 10px;
+}
+
+.text-inputs,
+.checkbox-input {
+    margin-bottom: 20px;
+}
+
+.textfield {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
