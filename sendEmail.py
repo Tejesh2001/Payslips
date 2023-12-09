@@ -58,10 +58,11 @@ from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
 
-def sendEmail(name, email, month, personName):
-    body = f''' Dear  {personName}, 
-                Please find attached the  {month}. 
-                Please use your PAN number as the password for opening the pdf document.
+def sendEmail(name, email, month, person_name, type_of_file, is_pan):
+
+    body = f''' Dear  {person_name}, 
+                Please find attached {type_of_file} {month}.
+                {is_pan}
                 HR'''
     # put your email here
     sender = 'hr@conacent.com'

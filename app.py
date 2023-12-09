@@ -21,7 +21,6 @@ from PyPDF2 import PdfFileReader, PdfFileMerger, PdfFileWriter
 
 from reportlab.lib import pdfencrypt
 
-
 from reportlab.platypus import Table, TableStyle, Paragraph
 
 from reportlab.platypus import SimpleDocTemplate, Spacer, Image
@@ -49,9 +48,16 @@ def create_payslip():
     #this was changed
     #convert the font so it is compatible
     pdfmetrics.registerFont(TTFont('Arial','arial.ttf'))
+    output_file_name = request.form['field1']
+    input_form_text = request.form['field2']
+    type_of_file = request.form['field3']
+    is_encrypted = request.form.get('encrypt')
+    print("check")
+    print(is_encrypted)
+    
 
 
-    r = request.files['excel']
+    r = request.files['excelFile']
 
     #import the sheet from the excel file
     wb = openpyxl.load_workbook(r, data_only=True)
@@ -166,8 +172,8 @@ def create_payslip():
                     if data[0][1] != "":
 
                         #First part
-                       
-                        data[0] = [Paragraph("<b> INCREMENT W.E.F." + " " + data[0][0].upper() +  "</b>")]
+                        
+                        data[0] = [Paragraph(f"<b> {output_file_name} " + " " + data[0][0].upper() +  "</b>")]
                         table = Table(data)
                         style = TableStyle([
                         ('BACKGROUND', (0,0), (3,0), colors.white),
@@ -237,22 +243,26 @@ def create_payslip():
                            parent=style_new['Heading2'],
                            alignment=1,
                            spaceAfter=2)
-            elements.append(Paragraph(("<i> CTC includes Company contributions to PF and ESI (if applicable) and Gratuity_  Please note that salary details and increment are strictly confidential  and not to be discussed with anyone </i>"), yourStyle))
-            elements.append(Paragraph("<i> CTC includes Company contributions to PF and ESI (if applicable) and Gratuity_  Please note that salary details and increment are strictly confidential  and not to be discussed with anyone </i>",  yourStyle))
+            elements.append(Paragraph(f"<i>{input_form_text}</i>",  yourStyle))
+            elements.append(Paragraph("<i> Registered Office:  P-94/95, Bangur Avenue, BL-C, Kolkata - 700055 </i>",  yourStyle))
             pdf.build(elements)
 
             # create a PdfFileWriter object
             out = PdfFileWriter()
+            
 
             
             # Open our PDF file with the PdfFileReader
             filename = PdfFileReader(name)
             out.appendPagesFromReader(filename)
-            
-            if password == "":
+            is_pan = ""
+            print(is_encrypted)
+            if is_encrypted == "on":
+                print(is_encrypted)
+                print("trigger")
                 password = vals[5]
-
-            out.encrypt(user_pwd = password)
+                out.encrypt(user_pwd = password)
+                is_pan = "Please use your PAN number as the password for opening the pdf document."
 
 
             with open(name, "wb") as f:
@@ -268,9 +278,11 @@ def create_payslip():
             if (year != "N/A"):
                 import os 
                 if os.path.exists(name):
-                    sendEmail(name, email, month=str(vals[0]), personName= str (vals[1]))
+                    
+                    sendEmail(name = name, email = email, month=str(vals[0]), person_name= str (vals[1]), \
+                    type_of_file = type_of_file, is_pan= is_pan)
                     os.remove(name)
-
+                    print("d")
 
                 else:
                     print("The file does not exist")
