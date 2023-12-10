@@ -60,7 +60,7 @@ from email import encoders
 
 def sendEmail(name, email, month, person_name, type_of_file, is_pan):
 
-    body = f''' Dear  {person_name}, 
+    body = f''' Dear {person_name}, 
                 Please find attached {type_of_file} {month}.
                 {is_pan}
                 HR'''
@@ -101,6 +101,8 @@ def sendEmail(name, email, month, person_name, type_of_file, is_pan):
 
     #use gmail with port
     session = smtplib.SMTP('mail.conacent.com', 587)
+    session.set_debuglevel(1)
+    session.ehlo()
     #enable security
     session.starttls()
 
