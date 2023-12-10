@@ -58,7 +58,7 @@ def create_payslip():
     # Handle the uploaded file and form inputs here
     # Example: Save the file, process it, etc.
     print(option)
-    
+
     if option == 'custom':
         file_header = request.form['field1']
         bottom_label = request.form['field2']
@@ -68,7 +68,7 @@ def create_payslip():
     
     if option == 'salarySlip':
         file_header = "Salary slip for the month of"
-        email_file_body = file_header
+        email_file_body = "salary slip for the month of"
         bottom_label = "The figures in the salary slip are confidential and not to be disclosed.\
               Signature is not required for this payslip"
 
