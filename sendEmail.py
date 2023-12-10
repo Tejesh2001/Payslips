@@ -58,10 +58,10 @@ from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
 
-def sendEmail(name, email, month, person_name, type_of_file, is_pan):
+def sendEmail(name, email, month, person_name, email_file_body, is_pan):
 
     body = f''' Dear {person_name}, 
-                Please find attached {type_of_file} {month}.
+                Please find attached the {email_file_body} {month}.
                 {is_pan}
                 HR'''
     # put your email here

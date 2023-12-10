@@ -11,9 +11,15 @@
         <form action="/extract" method="post" enctype="multipart/form-data">
             <input type="file" name="excelFile" accept=".xls,.xlsx" />
             <br/><br/>
+            <h2>Choose function type</h2>
+            <label for="options"></label>
+            <select id="options" name="options">
+                <option value="default">Select...</option>
+                <option value="custom">Custom</option>
+                <option value="salarySlip">Salary Slip</option>
+            </select><br><br>
 
-            <h2>Text Input Fields</h2>
-            <div class="text-inputs">
+            <div id="customFields" style="display:none;">
                 <label for="field1">Enter first line for file</label>
                 <input type="text" id="field1" name="field1" class="textfield" />
                 <br/><br/>
@@ -22,7 +28,7 @@
                 <input type="text" id="field2" name="field2" class="textfield" />
                 <br/><br/>
 
-                <label for="field3">Enter body of email after "Please find attached"</label>
+                <label for="field3">Enter body of email after "Please find attached the"</label>
                 <input type="text" id="field3" name="field3" class="textfield" />
                 <br/><br/>
 
@@ -31,14 +37,31 @@
                 <br/><br/>
             </div>
 
+
             <h2>Password Encryption</h2>
             <div class="checkbox-input">
-                <label for="encrypt">Encrypt Password:</label>
+                <label for="encrypt"></label>
                 <input type="checkbox" id="encrypt" name="encrypt" />
                 <br/><br/>
             </div>
 
             <input type="submit" value="Submit" />
+
+            <script>
+                document.getElementById("options").addEventListener("change", function() {
+                    var selectedOption = this.value;
+                    var customFields = document.getElementById("customFields");
+        
+                    if (selectedOption === "custom") {
+                        customFields.style.display = "block";
+                    } else {
+                        customFields.style.display = "none";
+                    }
+                });
+            </script>
+
+            </div>
+
         </form>
     </div>
 

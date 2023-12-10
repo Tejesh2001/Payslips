@@ -48,13 +48,30 @@ def create_payslip():
     #this was changed
     #convert the font so it is compatible
     pdfmetrics.registerFont(TTFont('Arial','arial.ttf'))
-    output_file_name = request.form['field1']
-    input_form_text = request.form['field2']
-    type_of_file = request.form['field3']
+    file_header = ""
+    bottom_label = ""
+    email_file_body = ""
     is_encrypted = request.form.get('encrypt')
-    print("check")
-    print(is_encrypted)
+
+    option = request.form.get('options')
     
+    # Handle the uploaded file and form inputs here
+    # Example: Save the file, process it, etc.
+    print(option)
+    
+    if option == 'custom':
+        file_header = request.form['field1']
+        bottom_label = request.form['field2']
+        email_file_body = request.form['field3']
+        # Handle custom fields data
+    
+    
+    if option == 'salarySlip':
+        file_header = "Salary slip for the month of"
+        email_file_body = file_header
+        bottom_label = "The figures in the salary slip are confidential and not to be disclosed.\
+              Signature is not required for this payslip"
+
 
 
     r = request.files['excelFile']
@@ -173,7 +190,7 @@ def create_payslip():
 
                         #First part
                         
-                        data[0] = [Paragraph(f"<b> {output_file_name} " + " " + data[0][0].upper() +  "</b>")]
+                        data[0] = [Paragraph(f"<b> {file_header} " + " " + data[0][0].upper() +  "</b>")]
                         table = Table(data)
                         style = TableStyle([
                         ('BACKGROUND', (0,0), (3,0), colors.white),
@@ -243,7 +260,7 @@ def create_payslip():
                            parent=style_new['Heading2'],
                            alignment=1,
                            spaceAfter=2)
-            elements.append(Paragraph(f"<i>{input_form_text}</i>",  yourStyle))
+            elements.append(Paragraph(f"<i>{bottom_label}</i>",  yourStyle))
             elements.append(Paragraph("<i> Registered Office:  P-94/95, Bangur Avenue, BL-C, Kolkata - 700055 </i>",  yourStyle))
             pdf.build(elements)
 
@@ -275,23 +292,22 @@ def create_payslip():
 
             i += 1
             year = vals[0]
-            if (year != "N/A"):
-                import os 
-                if os.path.exists(name):
-                    limit = name + " second to last being sent/ last before breaking"
-                    print(name + " second to last being sent/ last before breaking")
-                    try :
-                        sendEmail(name = name, email = email, month=str(vals[0]), person_name= str (vals[1]), \
-                        type_of_file = type_of_file, is_pan= is_pan)
-                        os.remove(name)
-                        print("d")
-                    except:
-                        return f"The limit has been reached. This is the {limit}. Please try again in 5 minutes", 400
+            # if (year != "N/A"):
+            #     import os 
+            #     if os.path.exists(name):
+            #         limit = name + " second to last being sent/ last before breaking"
+            #         print(name + " second to last being sent/ last before breaking")
+            #         try :
+            #             sendEmail(name = name, email = email, month=str(vals[0]), person_name= str (vals[1]), \
+            #             email_file_body = email_file_body, is_pan= is_pan)
+            #             os.remove(name)
+            #         except:
+            #             return f"The limit has been reached. This is the {limit}. Please try again in 5 minutes", 400
 
 
 
-                else:
-                    print("The file does not exist")
+            #     else:
+            #         print("The file does not exist")
 
           
     # if (year != "N/A"):

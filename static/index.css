@@ -1,33 +1,61 @@
 body {
     margin: 0;
     display: flex;
+    font-family: Arial, sans-serif;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: beige;
+    background-color: beige; /* Light gray background */
 }
 
 .container {
-    width: 80%;
-    padding: 20px;
-    background-color:whitesmoke; /* Set the background color to pink */
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 40%;
+    padding: 40px;
+    background-color: whitesmoke;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
-.container h2 {
-    margin-bottom: 10px;
-}
-
-.text-inputs,
-.checkbox-input {
+.container h1 {
     margin-bottom: 20px;
+    font-size: 28px;
+    color: #333;
 }
 
-.textfield {
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #666;
+}
+
+input[type="file"],
+select,
+input[type="text"],
+input[type="submit"] {
     width: 100%;
-    padding: 8px;
+    padding: 12px;
+    margin-bottom: 20px;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+    font-size: 16px;
+}
+
+input[type="submit"] {
+    background-color: #007bff; /* Blue button */
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+
+.checkbox-input input[type="checkbox"] {
+    transform: scale(1.5); /* Increase the size of the checkbox */
+    margin-right: 10px; /* Provide some spacing */
+    vertical-align: middle; /* Align the checkbox vertically */
 }
