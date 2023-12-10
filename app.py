@@ -292,22 +292,22 @@ def create_payslip():
 
             i += 1
             year = vals[0]
-            # if (year != "N/A"):
-            #     import os 
-            #     if os.path.exists(name):
-            #         limit = name + " second to last being sent/ last before breaking"
-            #         print(name + " second to last being sent/ last before breaking")
-            #         try :
-            #             sendEmail(name = name, email = email, month=str(vals[0]), person_name= str (vals[1]), \
-            #             email_file_body = email_file_body, is_pan= is_pan)
-            #             os.remove(name)
-            #         except:
-            #             return f"The limit has been reached. This is the {limit}. Please try again in 5 minutes", 400
+            if (year != "N/A"):
+                import os 
+                if os.path.exists(name):
+                    limit = name + " second to last being sent/ last before breaking"
+                    print(name + " second to last being sent/ last before breaking")
+                    try :
+                        sendEmail(name = name, email = email, month=str(vals[0]), person_name= str (vals[1]), \
+                        email_file_body = email_file_body, is_pan= is_pan)
+                        os.remove(name)
+                    except:
+                        return f"The limit has been reached. This is the {limit}. Please try again in 5 minutes", 400
 
 
 
-            #     else:
-            #         print("The file does not exist")
+                else:
+                    print("The file does not exist")
 
           
     # if (year != "N/A"):
